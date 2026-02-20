@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- improved viewport for better mobile scaling & touch -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Nexgen mParivahan – mobile friendly</title>
+
+  <!-- font remains the same, but weights adjusted slightly for readability on small screens -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* MOBILE-FIRST RESET & VARIABLES */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      /* background remains the same, but we make sure it tiles nicely on small heights */
+      background: url('https://www.nicepng.com/png/detail/260-2602719_in-the-governments-online-platform-for-citizen-participation.png') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      /* ensure overlay covers entire content even on short screens */
+    }
+
+    /* stronger overlay with subtle gradient for better text contrast on all devices */
+    body::before {
+      content: "";
+      position: fixed; /* fixed to cover even during scroll */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 20, 30, 0.8) 100%);
+      z-index: 0;
+      pointer-events: none; /* allow clicks to pass through */
+    }
+
+    /* wrapper uses relative + flex to push footer down on all screens */
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: 100%;
+      max-width: 1200px; /* keeps large screens readable */
+      margin: 0 auto;
+      padding: 0 12px; /* minimal side padding, expands on larger */
+    }
+
+    /* HERO – condensed for mobile, balanced for tablets */
+    .hero {
+      padding: 2rem 0.5rem 1.5rem 0.5rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;   /* scales nicely between 320px - 400px */
+      font-weight: 700;
+      line-height: 1.2;
+      text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+      word-break: break-word;
+    }
+
+    .hero p {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+      color: #e0e0e0;
+      font-weight: 300;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* DOWNLOAD BUTTON – bigger tap target, shiny, fully responsive */
+    .download-btn {
+      margin: 2rem auto 0.5rem auto;
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 50px;
+      background: linear-gradient(90deg, #00f260, #0575e6);
+      color: white;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 20px rgba(0, 255, 200, 0.8);
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      min-width: 220px;     /* ensures consistent width */
+      max-width: 90%;
+      width: auto;
+      text-align: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .download-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 255, 200, 1);
+    }
+
+    .download-btn:active {
+      transform: scale(0.98);  /* subtle tap feedback on mobile */
+    }
+
+    .download-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+      transition: left 0.6s;
+    }
+
+    .download-btn:hover::before {
+      left: 100%;
+    }
+
+    /* FEATURES grid – mobile first: 1 column, then adaptive */
+    .features {
+      padding: 1.5rem 0 2rem 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .feature-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem 1rem;
+      border-radius: 24px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px); /* safari support */
+      transition: transform 0.2s ease, background 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* slightly smaller hover movement on mobile to avoid weirdness */
+    .feature-box:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .feature-box h3 {
+      margin-bottom: 0.6rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .feature-box p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #f0f0f0;
+      font-weight: 300;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* FOOTER – always at bottom */
+    footer {
+      padding: 1.2rem 0.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 30px 30px 0 0;
+      backdrop-filter: blur(8px);
+      margin-top: auto;       /* pushes footer down in flex column */
+      width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ccc;
+    }
+
+    /* ===== TABLET & LARGER ( ≥600px ) ===== */
+    @media screen and (min-width: 600px) {
+      .wrapper {
+        padding: 0 20px;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+      }
+
+      .download-btn {
+        padding: 1rem 3rem;
+        font-size: 1.3rem;
+        min-width: 260px;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.8rem;
+        padding: 2rem 0 2.5rem 0;
+      }
+
+      .feature-box {
+        padding: 2rem 1rem;
+      }
+
+      .feature-box h3 {
+        font-size: 1.5rem;
+      }
+
+      .feature-box p {
+        font-size: 1rem;
+        max-width: 300px;
+      }
+    }
+
+    /* ===== DESKTOP / LARGE ( ≥900px ) ===== */
+    @media screen and (min-width: 900px) {
+      .features {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+
+      .feature-box:hover {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* small height adjustments for very short screens (landscape phones) */
+    @media screen and (max-height: 500px) and (orientation: landscape) {
+      .hero {
+        padding: 1rem 0.5rem 0.2rem;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .features {
+        padding: 0.8rem 0;
+        gap: 0.8rem;
+      }
+      .feature-box {
+        padding: 0.8rem 0.6rem;
+      }
+      .download-btn {
+        margin: 1rem auto 0.2rem;
+        padding: 0.5rem 1.8rem;
+      }
+    }
+
+    /* ensure no horizontal overflow */
+    body, .wrapper, .hero, .features, footer {
+      overflow-x: hidden;
+    }
+
+    /* tiny extra touch: make feature boxes fully click-friendly (if they ever become links) */
+    .feature-box {
+      -webkit-tap-highlight-color: rgba(0, 255, 255, 0.2);
+    }
+
+    /* preserve background fixed on iOS etc */
+    @supports (-webkit-touch-callout: none) {
+      body {
+        background-attachment: scroll; /* fixed issues on some iOS */
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <section class="hero">
+    <h1>Nexgen mParivahan 🚗</h1>
+    <p>Digital Vehicle Services – Fast, Secure & Smart</p>
+
+    <!-- download button remains interactive, large tap area -->
+    <a href="play.html" class="download-btn" role="button" aria-label="Download Nexgen mParivahan app">
+      Download Now
+    </a>
+  </section>
+
+  <!-- features grid with accessible text -->
+  <section class="features">
+    <div class="feature-box">
+      <h3>📄 RC & DL Details</h3>
+      <p>Access vehicle registration and license information instantly.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>📱 Digital Documents</h3>
+      <p>Carry official vehicle documents securely in digital form.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>🔍 Vehicle Verification</h3>
+      <p>Check vehicle ownership and status anytime.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>🔐 Secure Access</h3>
+      <p>Government-aligned secure digital services platform.</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Nexgen mParivahan. All Rights Reserved.
+  </footer>
+</div>
+
+<!-- small script to ensure touch responsiveness and no 300ms delay (optional, but passive) -->
+<script>
+  (function() {
+    // Just a passive check: remove any unwanted 300ms delay? not needed, but we keep friendly.
+    // Ensure that the button is not delayed on old mobiles (passive event listener)
+    document.querySelectorAll('.download-btn, .feature-box').forEach(el => {
+      el.addEventListener('touchstart', function(e) {
+        // just to make touch feedback snappy – no delay
+      }, { passive: true });
+    });
+
+    // Also adjust for iOS safe area? not necessary, but wrapper max-width handles.
+  })();
+</script>
+
+</body>
+</html>
